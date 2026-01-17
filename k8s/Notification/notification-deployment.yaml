@@ -28,65 +28,60 @@ spec:
               echo "RabbitMQ disponível!"
 
       containers:
-        - name: catalog-api
-          image: catalog-api:1.0.0
+        - name: notification-api
+          image: notification-api:1.0.0
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
 
           envFrom:
             - configMapRef:
-                name: catalog-api-config
+                name: notification-api-config
 
           env:
-            - name: ConnectionStrings__Core
-              valueFrom:
-                secretKeyRef:
-                  name: catalog-api-secrets
-                  key: connectionString
-
-            - name: Jwt__Key
-              valueFrom:
-                secretKeyRef:
-                  name: catalog-api-secrets
-                  key: jwtKey
-
             - name: RabbitMQ__Username
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: notification-api-secrets
                   key: rabbitMQDefaultUser
 
             - name: RabbitMQ__Password
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: notification-api-secrets
                   key: rabbitMQDefaultPass
 
             - name: RabbitMQ__VirtualHost
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: notification-api-secrets
                   key: rabbitMQDefaultVHost
 
             - name: RabbitMQ__Host
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: notification-api-secrets
                   key: rabbitMQDefaultHost
 
           readinessProbe:
-            httpGet:
-              path: /health
-              port: 8080
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  test -e /proc/1
             initialDelaySeconds: 10
             periodSeconds: 5
+            failureThreshold: 3
 
           livenessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 20
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  test -e /proc/1
+            initialDelaySeconds: 30
             periodSeconds: 20
             failureThreshold: 3
 

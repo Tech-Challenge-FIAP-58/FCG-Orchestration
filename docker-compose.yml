@@ -1,4 +1,4 @@
-version: "3.9"
+ï»¿version: "3.9"
 
 services:
   sqlserver:
@@ -18,29 +18,23 @@ services:
     container_name: rabbitmq
     hostname: rabbitmq
     ports:
-      # Porta para conexão AMQP
       - "5672:5672"
-      # Porta para interface de gerenciamento
       - "15672:15672"
     environment:
-      # Usuário e senha padrão
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
-      # Configurações adicionais
       RABBITMQ_DEFAULT_VHOST: ${RABBITMQ_DEFAULT_VHOST}
       RABBITMQ_HOST: ${RABBITMQ_HOST}
     volumes:
-      # Volume para persistir dados
       - rabbitmq_data:/var/lib/rabbitmq
-      # Volume para logs
       - rabbitmq_logs:/var/log/rabbitmq
     restart: unless-stopped
 
   user-api:
     container_name: user-api
     build:
-      context: ../UserService
-      dockerfile: src/UserService.WebApi/Dockerfile
+      context: ../UsersAPI
+      dockerfile: src/FCG.WebApi/Dockerfile
     image: user-api:latest
     ports:
       - "8080:8080"
@@ -57,6 +51,10 @@ services:
       Jwt__Audience: ${JWT_AUDIENCE}
       Jwt__Key: ${JWT_KEY}
       Jwt__ExpiresInMinutes: ${JWT_EXPIRES_IN_MINUTES}
+      RabbitMQ__Username: ${RABBITMQ_DEFAULT_USER}
+      RabbitMQ__Password: ${RABBITMQ_DEFAULT_PASS}
+      RabbitMQ__VirtualHost: ${RABBITMQ_DEFAULT_VHOST}
+      RabbitMQ__Host: ${RABBITMQ_HOST}
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]

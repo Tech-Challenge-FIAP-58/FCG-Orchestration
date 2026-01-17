@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: catalog-config
+  name: catalog-api-config
 data:
   ASPNETCORE_ENVIRONMENT: "Development"
   Jwt__Issuer: "fiap_fcg"
