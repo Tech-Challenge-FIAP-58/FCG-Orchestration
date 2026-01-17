@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: catalog-config
+data:
+  ASPNETCORE_ENVIRONMENT: "Development"
+  Jwt__Issuer: "fiap_fcg"
+  Jwt__Audience: "cloud_games"

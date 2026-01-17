@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-api
+  template:
+    metadata:
+      labels:
+        app: notification-api
+    spec:
+
+      initContainers:
+        - name: wait-for-rabbitmq
+          image: busybox
+          command:
+            - sh
+            - -c
+            - |
+              echo "Aguardando RabbitMQ..."
+              until nc -z rabbitmq 5672; do
+                echo "RabbitMQ ainda não disponível..."
+                sleep 5
+              done
+              echo "RabbitMQ disponível!"
+
+      containers:
+        - name: catalog-api
+          image: catalog-api:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+
+          envFrom:
+            - configMapRef:
+                name: catalog-api-config
+
+          env:
+            - name: ConnectionStrings__Core
+              valueFrom:
+                secretKeyRef:
+                  name: catalog-api-secrets
+                  key: connectionString
+
+            - name: Jwt__Key
+              valueFrom:
+                secretKeyRef:
+                  name: catalog-api-secrets
+                  key: jwtKey
+
+            - name: RabbitMQ__Username
+              valueFrom:
+                secretKeyRef:
+                  name: catalog-api-secrets
+                  key: rabbitMQDefaultUser
+
+            - name: RabbitMQ__Password
+              valueFrom:
+                secretKeyRef:
+                  name: catalog-api-secrets
+                  key: rabbitMQDefaultPass
+
+            - name: RabbitMQ__VirtualHost
+              valueFrom:
+                secretKeyRef:
+                  name: catalog-api-secrets
+                  key: rabbitMQDefaultVHost
+
+            - name: RabbitMQ__Host
+              valueFrom:
+                secretKeyRef:
+                  name: catalog-api-secrets
+                  key: rabbitMQDefaultHost
+
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 20
+            periodSeconds: 20
+            failureThreshold: 3
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
