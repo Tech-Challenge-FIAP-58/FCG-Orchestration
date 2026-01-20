@@ -11,7 +11,7 @@ Este documento descreve como executar o ambiente completo do projeto utilizando 
 
 ```text
 /
-├─ infra/
+├─ FCG-Orchestration/
 │  ├─ docker-compose.yml
 │  └─ k8s/
 ├─ UsersAPI/

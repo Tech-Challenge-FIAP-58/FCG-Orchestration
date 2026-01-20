@@ -34,7 +34,7 @@ services:
     container_name: user-api
     build:
       context: ../UsersAPI
-      dockerfile: src/FCG.WebApi/Dockerfile
+      dockerfile: src/FCG.Users.WebApi/Dockerfile
     image: user-api:latest
     ports:
       - "8080:8080"
@@ -66,7 +66,7 @@ services:
     container_name: catalog-api
     build:
       context: ../CatalogApi
-      dockerfile: src/FCG.WebApi/Dockerfile
+      dockerfile: src/FCG.Catalog.WebApi/Dockerfile
     image: catalog-api:latest
     ports:
       - "8081:8080"
