@@ -65,7 +65,7 @@ services:
   catalog-api:
     container_name: catalog-api
     build:
-      context: ../CatalogApi
+      context: ../CatalogAPI
       dockerfile: src/FCG.Catalog.WebApi/Dockerfile
     image: catalog-api:latest
     ports:
@@ -97,7 +97,7 @@ services:
   payments-api:
     container_name: payments-api
     build:
-      context: ../PaymentsApi
+      context: ../PaymentsAPI
       dockerfile: src/FCG.Payments/Dockerfile
     image: payments-api:latest
     ports:
@@ -127,7 +127,7 @@ services:
   notification-api:
     container_name: notification-api
     build:
-      context: ../NotificationsApi
+      context: ../NotificationsAPI
       dockerfile: src/FCG.Notifications/Dockerfile
     image: notification-api:latest
     ports:
