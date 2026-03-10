@@ -55,6 +55,9 @@ services:
       RabbitMQ__Password: ${RABBITMQ_DEFAULT_PASS}
       RabbitMQ__VirtualHost: ${RABBITMQ_DEFAULT_VHOST}
       RabbitMQ__Host: ${RABBITMQ_HOST}
+      BootstrapAdmin__Cpf: ${BOOTSTRAP_CPF}
+      BootstrapAdmin__Email: ${BOOTSTRAP_EMAIL}
+      BootstrapAdmin__Password: ${BOOTSTRAP_PASSWORD}
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
