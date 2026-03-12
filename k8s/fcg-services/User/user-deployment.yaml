@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: user-api
+  namespace: fcg-services
 spec:
   replicas: 1
   selector:
@@ -22,10 +23,10 @@ spec:
             - |
               echo "Aguardando SQL Server..."
               until nc -z sqlserver 1433; do
-                echo "SQL Server ainda não disponível..."
+                echo "SQL Server ainda nï¿½o disponï¿½vel..."
                 sleep 5
               done
-              echo "SQL Server disponível!"
+              echo "SQL Server disponï¿½vel!"
 
         - name: wait-for-rabbitmq
           image: busybox
@@ -35,14 +36,14 @@ spec:
             - |
               echo "Aguardando RabbitMQ..."
               until nc -z rabbitmq 5672; do
-                echo "RabbitMQ ainda não disponível..."
+                echo "RabbitMQ ainda nï¿½o disponï¿½vel..."
                 sleep 5
               done
-              echo "RabbitMQ disponível!"
+              echo "RabbitMQ disponï¿½vel!"
 
       containers:
         - name: user-api
-          image: user-api:1.0.0
+          image: docker pull ghcr.io/tech-challenge-fiap-58/usersapi:sha256-5ec423
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
@@ -87,6 +88,24 @@ spec:
                 secretKeyRef:
                   name: user-api-secrets
                   key: rabbitMQDefaultHost
+            
+            - name: BootstrapAdmin__Cpf
+              valueFrom:
+                secretKeyRef:
+                  name: user-api-secrets
+                  key: bootstrapAdminCpf
+                  
+            - name: BootstrapAdmin__Email
+              valueFrom:
+                secretKeyRef:
+                  name: user-api-secrets
+                  key: bootstrapAdminEmail
+
+            - name: BootstrapAdmin__Password
+              valueFrom:
+                secretKeyRef:
+                  name: user-api-secrets
+                  key: bootstrapAdminPassword
 
           readinessProbe:
             httpGet:

@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fcg-gateway
+  labels:
+    name: fcg-gateway
+    app: fcg
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fcg-services
+  labels:
+    name: fcg-services
+    app: fcg
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fcg-messaging
+  labels:
+    name: fcg-messaging
+    app: fcg
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fcg-observability
+  labels:
+    name: fcg-observality
+    app: fcg
