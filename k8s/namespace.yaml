@@ -6,6 +6,8 @@ metadata:
     name: fcg-gateway
     app: fcg
 
+---
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -13,6 +15,8 @@ metadata:
   labels:
     name: fcg-services
     app: fcg
+
+---
 
 apiVersion: v1
 kind: Namespace
@@ -22,6 +26,8 @@ metadata:
     name: fcg-data
     app: fcg
 
+---
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -29,6 +35,8 @@ metadata:
   labels:
     name: fcg-messaging
     app: fcg
+
+---
 
 apiVersion: v1
 kind: Namespace
