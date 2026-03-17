@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: payment-api
+  namespace: fcg-services
 spec:
   replicas: 1
   selector:
@@ -22,10 +23,10 @@ spec:
             - |
               echo "Aguardando SQL Server..."
               until nc -z sqlserver 1433; do
-                echo "SQL Server ainda não disponível..."
+                echo "SQL Server ainda nï¿½o disponï¿½vel..."
                 sleep 5
               done
-              echo "SQL Server disponível!"
+              echo "SQL Server disponï¿½vel!"
 
         - name: wait-for-rabbitmq
           image: busybox
@@ -35,10 +36,10 @@ spec:
             - |
               echo "Aguardando RabbitMQ..."
               until nc -z rabbitmq 5672; do
-                echo "RabbitMQ ainda não disponível..."
+                echo "RabbitMQ ainda nï¿½o disponï¿½vel..."
                 sleep 5
               done
-              echo "RabbitMQ disponível!"
+              echo "RabbitMQ disponï¿½vel!"
 
       containers:
         - name: payment-api

@@ -17,6 +17,14 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
+  name: fcg-data
+  labels:
+    name: fcg-data
+    app: fcg
+
+apiVersion: v1
+kind: Namespace
+metadata:
   name: fcg-messaging
   labels:
     name: fcg-messaging

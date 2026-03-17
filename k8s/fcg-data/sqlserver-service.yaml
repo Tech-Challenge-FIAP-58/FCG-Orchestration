@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: sqlserver
+  namespace: fcg-data
 spec:
   selector:
     app: sqlserver
