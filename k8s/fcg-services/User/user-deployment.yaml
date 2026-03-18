@@ -43,7 +43,7 @@ spec:
 
       containers:
         - name: user-api
-          image: docker pull ghcr.io/tech-challenge-fiap-58/usersapi:sha256-44f601
+          image: docker pull ghcr.io/tech-challenge-fiap-58/usersapi:main
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
