@@ -62,25 +62,25 @@ spec:
             - name: RabbitMQ__Username
               valueFrom:
                 secretKeyRef:
-                  name: payment-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultUser
 
             - name: RabbitMQ__Password
               valueFrom:
                 secretKeyRef:
-                  name: payment-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultPass
 
             - name: RabbitMQ__VirtualHost
               valueFrom:
                 secretKeyRef:
-                  name: payment-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultVHost
 
             - name: RabbitMQ__Host
               valueFrom:
                 secretKeyRef:
-                  name: payment-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultHost
 
             - name: PaymentConfig__DefaultApiKey

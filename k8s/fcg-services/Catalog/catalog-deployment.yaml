@@ -68,25 +68,25 @@ spec:
             - name: RabbitMQ__Username
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultUser
 
             - name: RabbitMQ__Password
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultPass
 
             - name: RabbitMQ__VirtualHost
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultVHost
 
             - name: RabbitMQ__Host
               valueFrom:
                 secretKeyRef:
-                  name: catalog-api-secrets
+                  name: services-secrets
                   key: rabbitMQDefaultHost
 
           readinessProbe:
