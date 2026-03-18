@@ -28,18 +28,18 @@ spec:
               done
               echo "SQL Server dispon�vel!"
 
-        - name: wait-for-rabbitmq
-          image: busybox
-          command:
-            - sh
-            - -c
-            - |
-              echo "Aguardando RabbitMQ..."
-              until nc -z rabbitmq 5672; do
-                echo "RabbitMQ ainda n�o dispon�vel..."
-                sleep 5
-              done
-              echo "RabbitMQ dispon�vel!"
+        # - name: wait-for-rabbitmq
+        #   image: busybox
+        #   command:
+        #     - sh
+        #     - -c
+        #     - |
+        #       echo "Aguardando RabbitMQ..."
+        #       until nc -z rabbitmq 5672; do
+        #         echo "RabbitMQ ainda n�o dispon�vel..."
+        #         sleep 5
+        #       done
+        #       echo "RabbitMQ dispon�vel!"
 
       containers:
         - name: user-api
