@@ -4,7 +4,7 @@ metadata:
   name: users-ingress
   namespace: fcg-services
   annotations:
-    konghq.com/strip-path: "true"
+    konghq.com/strip-path: "false"
 spec:
   ingressClassName: kong
   rules:
@@ -15,7 +15,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: users-service
+            name: user-api
             port:
               number: 80
 
@@ -23,6 +23,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: users-service
+            name: user-api
             port:
               number: 80
