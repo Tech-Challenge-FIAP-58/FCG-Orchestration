@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: user-api
+  namespace: fcg-observability
+spec:
+  selector:
+    matchLabels:
+      app: user-api
+  namespaceSelector:
+    matchNames:
+      - fcg-services
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
