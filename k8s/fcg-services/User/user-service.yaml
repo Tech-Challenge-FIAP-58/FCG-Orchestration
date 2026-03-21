@@ -1,6 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app: user-api
   name: user-api
   namespace: fcg-services
 spec:
