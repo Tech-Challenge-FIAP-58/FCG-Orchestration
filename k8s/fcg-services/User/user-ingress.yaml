@@ -26,3 +26,11 @@ spec:
             name: user-api
             port:
               number: 80
+
+      - path: /metrics
+        pathType: Prefix
+        backend:
+          service:
+            name: user-api
+            port:
+              number: 80
