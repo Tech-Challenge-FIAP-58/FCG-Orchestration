@@ -43,7 +43,7 @@ spec:
 
       containers:
         - name: catalog-api
-          image: ghcr.io/tech-challenge-fcg/catalogapi:main
+          image: ghcr.io/tech-challenge-fiap-58/catalogapi:main
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
