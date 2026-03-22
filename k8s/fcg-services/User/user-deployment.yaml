@@ -83,7 +83,7 @@ spec:
                   name: user-api-secrets
                   key: issuer
 
-            - name: RabbitMQ__Username
+            - name: RabbitMQ__UserName
               valueFrom:
                 secretKeyRef:
                   name: services-secrets
