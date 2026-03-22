@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: users-ingress
+  name: catalog-ingress
   namespace: fcg-services
   annotations:
     konghq.com/strip-path: "false"
@@ -11,19 +11,19 @@ spec:
   - http:
       paths:
 
-      - path: /User
+      - path: /Order
         pathType: Prefix
         backend:
           service:
-            name: user-api
+            name: catalog-api
             port:
               number: 80
 
-      - path: /Auth
+      - path: /Game
         pathType: Prefix
         backend:
           service:
-            name: user-api
+            name: catalog-api
             port:
               number: 80
 
@@ -31,6 +31,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: user-api
+            name: catalog-api
             port:
               number: 80
